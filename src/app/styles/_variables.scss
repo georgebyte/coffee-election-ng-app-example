@@ -1,0 +1,51 @@
+// Color modifiers suffixes:
+// darkest -> darker -> dark -> (no suffix) -> light -> lighter -> lightest
+//
+// Size modifiers scale:
+// smallest -> smaller -> small -> default -> large -> larger -> largest
+
+$color--neutral: #6d5442;
+$color--neutral-light: #cec3bb;
+$color--neutral-lighter: #e0d7d1;
+$color--neutral-lightest: #f1edea;
+$color--primary: #6f4e37;
+$color--primary-dark: #4d3626;
+$color--primary-inverted: #ffffff;
+$color--secondary: #cc2424;
+$color--success: #58ce58;
+$color--info: #43b0ff;
+$color--error: #f9513e;
+$color--warning: #ff9900;
+
+$spacing--default: 16px;
+$spacing--smallest: 4px;
+$spacing--smaller: 6px;
+$spacing--small: 8px;
+$spacing--large: 24px;
+
+$background-color--default: $color--neutral-lightest;
+$background-color--hover: $color--neutral-light;
+
+$border-color--default: $color--neutral-light;
+
+$border-radius--default: 3px;
+
+$font-size--default: 16px;
+$font-size--smallest: 10px;
+$font-size--smaller: 12px;
+$font-size--small: 14px;
+$font-size--large: 20px;
+$font-size--larger: 26px;
+$font-size--largest: 32px;
+$font-size--h6: 16px;
+$font-size--h5: 18px;
+$font-size--h4: 20px;
+$font-size--h3: 22px;
+$font-size--h2: 24px;
+$font-size--h1: 26px;
+
+$z-index--modal: 10000;
+
+$font-family--default: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+
+$body__background-color: #cec3bb;

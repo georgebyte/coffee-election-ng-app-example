@@ -1,0 +1,18 @@
+<div class="ce-coffee-candidate__name">
+    {{candidate.name}}
+</div>
+
+<div class="ce-coffee-candidate__action">
+    <button (click)="onUserAction.emit(candidate.userAction)" [ngSwitch]="candidate.userAction">
+        <ng-container *ngSwitchCase="USER_ACTION.addVote">
+            Add vote
+        </ng-container>
+        <ng-container *ngSwitchCase="USER_ACTION.removeVote">
+            Remove vote
+        </ng-container>
+    </button>
+</div>
+
+<div class="ce-coffee-candidate__additional-actions">
+    <ng-content></ng-content>
+</div>

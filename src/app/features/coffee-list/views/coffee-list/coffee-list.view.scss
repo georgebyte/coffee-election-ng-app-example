@@ -1,0 +1,17 @@
+@import '../../../../styles/_variables';
+
+.ce-coffee-list-view__list {
+    position: relative;
+    min-height: 60px;
+    margin-top: $spacing--default;
+    padding: 0;
+}
+
+.ce-coffee-list-view__candidate {
+    padding: $spacing--default;
+    border-top: 1px solid $border-color--default;
+
+    &:first-of-type {
+        border-top: 0;
+    }
+}

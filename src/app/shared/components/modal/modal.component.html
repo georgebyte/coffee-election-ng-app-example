@@ -1,0 +1,9 @@
+<div
+    class="ce-modal__backdrop"
+    *ngIf="isOpen"
+    (click)="closeOnBackdropClick($event)"
+>
+    <div class="ce-modal__content-container">
+        <ng-content></ng-content>
+    </div>
+</div>

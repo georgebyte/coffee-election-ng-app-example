@@ -1,0 +1,88 @@
+@import './_variables';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    color: $color--neutral;
+    background-color: $body__background-color;
+    font-size: $font-size--default;
+    font-family: $font-family--default;
+}
+
+a {
+    color: $color--secondary;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+        text-decoration: underline;
+    }
+
+    &:hover,
+    &:active,
+    &:visited {
+        color: $color--secondary;
+    }
+}
+
+h1 {
+    font-size: $font-size--h1;
+}
+
+h2 {
+    font-size: $font-size--h2;
+}
+
+h3 {
+    font-size: $font-size--h3;
+}
+
+h4 {
+    font-size: $font-size--h4;
+}
+
+h5 {
+    font-size: $font-size--h5;
+}
+
+h6 {
+    font-size: $font-size--h6;
+}
+
+input[type='text'] {
+    padding: $spacing--smaller $spacing--small;
+    font-size: $font-size--default;
+}
+
+ce-app-root {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ce-view-container {
+    display: flex;
+    flex: 1;
+    padding: $spacing--default;
+}
+
+.ce-view-container > .ce-view {
+    display: block;
+    width: 100%;
+}
+
+.ce-panel {
+    width: 100%;
+    overflow: hidden;
+    padding: $spacing--default;
+    background-color: $background-color--default;
+    box-shadow: 0 0 3px 0 $color--neutral-light;
+    border-radius: $border-radius--default;
+}

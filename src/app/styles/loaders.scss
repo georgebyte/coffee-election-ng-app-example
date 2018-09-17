@@ -1,0 +1,23 @@
+.ce-loader {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url('/assets/loader.gif') no-repeat center center;
+    background-size: 100%;
+    background-color: transparent;
+    vertical-align: middle;
+}
+
+.ce-loader--takeover {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-size: 30px;
+}

@@ -1,0 +1,21 @@
+@import '../../styles/_variables';
+@import './_header.variables';
+
+:host {
+    display: flex;
+    height: $ce-header__height;
+    padding: $ce-header__padding;
+    background: $color--primary;
+}
+
+.ce-header__title {
+    color: $color--primary-inverted;
+    font-size: $font-size--largest;
+    line-height: $ce-header__height - 2*$ce-header__padding;
+
+    &:hover,
+    &:active,
+    &:visited {
+        text-decoration: none;
+    }
+}

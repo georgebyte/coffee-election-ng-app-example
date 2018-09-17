@@ -1,0 +1,43 @@
+{
+    "data": [
+        {
+            "name": "Americano",
+            "votes": [
+                {"user": "user1@test.com", "date": "2018-09-01"},
+                {"user": "user2@test.com", "date": "2018-09-03"},
+                {"user": "user3@test.com", "date": "2018-09-07"}
+            ]
+        },
+        {
+            "name": "Cappuccino",
+            "votes": [
+                {"user": "user2@test.com", "date": "2018-09-03"}
+            ]
+        },
+        {
+            "name": "Espresso",
+            "votes": [
+                {"user": "user2@test.com", "date": "2018-09-06"},
+                {"user": "user3@test.com", "date": "2018-09-08"},
+                {"user": "user4@test.com", "date": "2018-09-17"},
+                {"user": "user5@test.com", "date": "2018-09-27"}
+            ]
+        },
+        {
+            "name": "Macchiato",
+            "votes": [
+                {"user": "user1@test.com", "date": "2018-09-03"}
+            ]
+        },
+        {
+            "name": "Café Latte",
+            "votes": [
+                {"user": "user2@test.com", "date": "2018-09-21"},
+                {"user": "user3@test.com", "date": "2018-09-23"},
+                {"user": "user4@test.com", "date": "2018-09-23"},
+                {"user": "user5@test.com", "date": "2018-09-24"},
+                {"user": "user6@test.com", "date": "2018-09-26"}
+            ]
+        }
+    ]
+}

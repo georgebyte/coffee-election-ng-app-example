@@ -1,0 +1,27 @@
+@import '../../../styles/_variables';
+@import './_modal.variables';
+
+.ce-modal__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: $z-index--modal;
+    padding: $spacing--default;
+    background: rgba(0, 0, 0, 0.3);
+
+    @media only screen and (min-height: $ce-modal__breakpoint--bigger-vertical-spacing) {
+        padding: $ce-modal__spacing--vertical $spacing--default;
+    }
+}
+
+.ce-modal__content-container {
+    max-width: $ce-modal__width;
+    max-height: 100%;
+    margin: 0 auto;
+    overflow: auto;
+    background: #ffffff;
+    box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.5);
+    border-radius: $border-radius--default;
+}
