@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Store} from 'rxjs-observable-store';
-import {Subject} from 'rxjs';
+import {Subject, Observable} from 'rxjs';
 import {takeUntil, tap, switchMap, retry} from 'rxjs/operators';
 
 import {CoffeeListStoreState} from './coffee-list.store.state';
@@ -10,6 +10,7 @@ import {Candidate} from '../types/candidate';
 import * as candidateHelpers from '../helpers/candidate.helpers';
 import {UserStore} from '../../../core/user/services/user.store';
 import {User} from '../../../core/user/types/user';
+import {USER_ACTION} from '../coffee-list.constants';
 
 @Injectable()
 export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDestroy {
@@ -60,8 +61,22 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
         });
     }
 
-    submitUserAction(action: string): void {
-        console.log(action);
+    submitUserAction(candidate: Candidate, action: string): void {
+        let request$: Observable<null>;
+
+        if (action === USER_ACTION.addVote) {
+            request$ = this.endpoint.addVote(this, candidate);
+        }
+        if (action === USER_ACTION.removeVote) {
+            request$ = this.endpoint.removeVote(this, candidate);
+        }
+        request$
+            .pipe(
+                tap(() => {
+                    this.reloadCandidates();
+                })
+            )
+            .subscribe();
     }
 
     private initReloadCandidates$(): void {

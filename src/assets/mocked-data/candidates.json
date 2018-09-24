@@ -1,6 +1,7 @@
 {
     "data": [
         {
+            "id": "1",
             "name": "Americano",
             "votes": [
                 {"user": "user1@test.com", "date": "2018-09-01"},
@@ -9,12 +10,14 @@
             ]
         },
         {
+            "id": "2",
             "name": "Cappuccino",
             "votes": [
                 {"user": "user2@test.com", "date": "2018-09-03"}
             ]
         },
         {
+            "id": "3",
             "name": "Espresso",
             "votes": [
                 {"user": "user2@test.com", "date": "2018-09-06"},
@@ -24,12 +27,14 @@
             ]
         },
         {
+            "id": "4",
             "name": "Macchiato",
             "votes": [
                 {"user": "user1@test.com", "date": "2018-09-03"}
             ]
         },
         {
+            "id": "5",
             "name": "Café Latte",
             "votes": [
                 {"user": "user2@test.com", "date": "2018-09-21"},

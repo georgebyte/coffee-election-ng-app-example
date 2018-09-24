@@ -6,9 +6,13 @@ export const COFFEE_LIST_CONFIG = {
             name: 'listCandidates',
             url: `${APP_CONFIG.apiBaseUrl}/candidates.json`,
         },
-        postVote: {
-            name: 'postVote',
-            url: `${APP_CONFIG.apiBaseUrl}/vote`,
+        addVote: {
+            name: 'addVote',
+            url: `${APP_CONFIG.apiBaseUrl}/candidates/:id/vote`,
+        },
+        removeVote: {
+            name: 'removeVote',
+            url: `${APP_CONFIG.apiBaseUrl}/candidates/:id/vote`,
         },
     },
 };

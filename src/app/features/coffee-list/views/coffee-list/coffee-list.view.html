@@ -7,7 +7,7 @@
                 class="ce-coffee-candidate ce-coffee-list-view__candidate"
                 *ngFor="let candidate of subs.state$.candidates"
                 [candidate]="candidate"
-                (onUserAction)="store.submitUserAction($event)"
+                (onUserAction)="store.submitUserAction(candidate, $event)"
             >
                 <button (click)="store.openDetailsModal(candidate)">Show details</button>
             </ce-coffee-candidate>
