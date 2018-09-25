@@ -11,6 +11,7 @@ import * as candidateHelpers from '../helpers/candidate.helpers';
 import {UserStore} from '../../../core/user/services/user.store';
 import {User} from '../../../core/user/types/user';
 import {USER_ACTION} from '../coffee-list.constants';
+import {RequestStateUpdater} from '../../../shared/types/request-state-updater';
 
 @Injectable()
 export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDestroy {
@@ -63,12 +64,13 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
 
     submitUserAction(candidate: Candidate, action: string): void {
         let request$: Observable<null>;
+        const requestStateUpdater = this.getCandidateRequestStateUpdater(candidate);
 
         if (action === USER_ACTION.addVote) {
-            request$ = this.endpoint.addVote(this, candidate);
+            request$ = this.endpoint.addVote(this, candidate, requestStateUpdater);
         }
         if (action === USER_ACTION.removeVote) {
-            request$ = this.endpoint.removeVote(this, candidate);
+            request$ = this.endpoint.removeVote(this, candidate, requestStateUpdater);
         }
         request$
             .pipe(
@@ -109,5 +111,19 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
             ...this.state,
             candidates: candidateHelpers.getCandidatesInStoreFormat(candidates, user),
         });
+    }
+
+    private getCandidateRequestStateUpdater(candidate: Candidate): RequestStateUpdater {
+        return (requestState) => {
+            this.setState({
+                ...this.state,
+                candidates: this.state.candidates.map(c => {
+                    if (c.id === candidate.id) {
+                        return {...c, updateRequest: requestState}
+                    }
+                    return c;
+                }),
+            });
+        }
     }
 }

@@ -9,6 +9,7 @@ import {CoffeeListStore} from './coffee-list.store';
 import {COFFEE_LIST_CONFIG} from '../coffee-list.config';
 import {Candidate} from '../types/candidate';
 import * as endpointHelpers from '../../../shared/helpers/endpoint.helpers';
+import {RequestStateUpdater} from '../../../shared/types/request-state-updater';
 
 @Injectable()
 export class CoffeeListEndpoint extends StoreEndpoint {
@@ -44,22 +45,18 @@ export class CoffeeListEndpoint extends StoreEndpoint {
     addVote(
         store: CoffeeListStore,
         candidate: Candidate,
+        requestStateUpdater: RequestStateUpdater
     ): Observable<null> {
         const request = COFFEE_LIST_CONFIG.requests.addVote;
         const url = endpointHelpers.getUrlWithParams(request.url, {id: candidate.id});
-        // TODO (jurebajt): Set request state for each candidate separately
-        this.setRequestState(store, request, {
-            inProgress: true,
-        });
+        requestStateUpdater({inProgress: true});
         return this.http.post<ApiResponse<null>>(url, null).pipe(
             map(response => {
-                this.setRequestState(store, request, {
-                    inProgress: false,
-                });
+                requestStateUpdater({inProgress: false});
                 return response.data;
             }),
             catchError((error: HttpErrorResponse) => {
-                this.setRequestState(store, request, {
+                requestStateUpdater({
                     inProgress: false,
                     error: true,
                 });
@@ -71,27 +68,23 @@ export class CoffeeListEndpoint extends StoreEndpoint {
     removeVote(
         store: CoffeeListStore,
         candidate: Candidate,
+        requestStateUpdater: RequestStateUpdater
     ): Observable<null> {
         const request = COFFEE_LIST_CONFIG.requests.removeVote;
         const url = endpointHelpers.getUrlWithParams(request.url, {id: candidate.id});
-        // TODO (jurebajt): Set request state for each candidate separately
-        this.setRequestState(store, request, {
-            inProgress: true,
-        });
+        requestStateUpdater({inProgress: true});
         return this.http.delete<ApiResponse<null>>(url).pipe(
             map(response => {
-                this.setRequestState(store, request, {
-                    inProgress: false,
-                });
+                requestStateUpdater({inProgress: false});
                 return response.data;
             }),
             catchError((error: HttpErrorResponse) => {
-                this.setRequestState(store, request, {
+                requestStateUpdater({
                     inProgress: false,
                     error: true,
                 });
                 return throwError(error);
             })
         );
-  }
+    }
 }
