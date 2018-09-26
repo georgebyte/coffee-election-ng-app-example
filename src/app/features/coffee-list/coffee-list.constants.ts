@@ -1,5 +1,5 @@
 
-export const USER_ACTION = {
-    addVote: 'addVote',
-    removeVote: 'removeVote',
+export enum UserAction {
+    AddVote,
+    RemoveVote,
 };

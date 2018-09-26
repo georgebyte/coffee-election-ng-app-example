@@ -10,7 +10,7 @@ import {Candidate} from '../types/candidate';
 import * as candidateHelpers from '../helpers/candidate.helpers';
 import {UserStore} from '../../../core/user/services/user.store';
 import {User} from '../../../core/user/types/user';
-import {USER_ACTION} from '../coffee-list.constants';
+import {UserAction} from '../coffee-list.constants';
 import {RequestStateUpdater} from '../../../shared/types/request-state-updater';
 
 @Injectable()
@@ -62,16 +62,16 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
         });
     }
 
-    submitUserAction(candidate: Candidate, action: string): void {
+    submitUserAction(candidate: Candidate, action: UserAction): void {
         let request$: Observable<null>;
         const requestStateUpdater = this.getUpdateCandidateRequestStateUpdater(
             candidate
         );
 
-        if (action === USER_ACTION.addVote) {
+        if (action === UserAction.AddVote) {
             request$ = this.endpoint.addVote(candidate, requestStateUpdater);
         }
-        if (action === USER_ACTION.removeVote) {
+        if (action === UserAction.RemoveVote) {
             request$ = this.endpoint.removeVote(candidate, requestStateUpdater);
         }
         request$
@@ -104,14 +104,17 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
         this.userStore.user$
             .pipe(takeUntil(this.ngUnsubscribe$))
             .subscribe(user => {
-                this.updateCandidatesState(this.state.candidates, user);
+                this.updateCandidatesState(this.state.candidateList.candidates, user);
             });
     }
 
     private updateCandidatesState(candidates: Candidate[], user: User): void {
         this.setState({
             ...this.state,
-            candidates: candidateHelpers.getCandidatesInStoreFormat(candidates, user),
+            candidateList: {
+                ...this.state.candidateList,
+                candidates: candidateHelpers.getCandidatesInStoreFormat(candidates, user),
+            }
         });
     }
 
@@ -119,12 +122,15 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
         return (requestState) => {
             this.setState({
                 ...this.state,
-                candidates: this.state.candidates.map(c => {
-                    if (c.id === candidate.id) {
-                        return {...c, updateRequest: requestState}
-                    }
-                    return c;
-                }),
+                candidateList: {
+                    ...this.state.candidateList,
+                    candidates: this.state.candidateList.candidates.map(c => {
+                        if (c.id === candidate.id) {
+                            return {...c, updateRequest: requestState}
+                        }
+                        return c;
+                    }),
+                }
             });
         }
     }

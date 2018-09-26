@@ -11,7 +11,6 @@ import {Subject} from 'rxjs';
 import {CoffeeListStore} from '../../services/coffee-list.store';
 import {CoffeeListEndpoint} from '../../services/coffee-list.endpoint';
 import {ModalComponent} from '../../../../shared/components/modal/modal.component';
-import {USER_ACTION} from '../../coffee-list.constants';
 
 @Component({
     templateUrl: './coffee-list.view.html',
@@ -24,8 +23,6 @@ export class CoffeeListView implements OnInit, AfterViewInit, OnDestroy {
 
     @ViewChild('detailsModal')
     detailsModal: ModalComponent;
-
-    USER_ACTION = USER_ACTION;
 
     private ngUnsubscribe$: Subject<undefined> = new Subject();
 

@@ -1,5 +1,5 @@
 import {Candidate} from '../types/candidate';
-import {USER_ACTION} from '../coffee-list.constants';
+import {UserAction} from '../coffee-list.constants';
 import {User} from '../../../core/user/types/user';
 import * as dateHelpers from '../../../shared/helpers/date.helpers'
 
@@ -24,7 +24,7 @@ function prettifyVoteDates(candidate: Candidate): Candidate {
 function getCandidateWithUserActions(candidate: Candidate, user: User): Candidate {
     return {
         ...candidate,
-        userAction: hasUserVotedForCandidate(user, candidate) ? USER_ACTION.removeVote : USER_ACTION.addVote,
+        userAction: hasUserVotedForCandidate(user, candidate) ? UserAction.RemoveVote : UserAction.AddVote,
     };
 }
 

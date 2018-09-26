@@ -1,9 +1,16 @@
 import {Requests} from '../types/requests';
 import {DetailsModal} from '../types/details-modal';
-import {Candidate} from '../types/candidate';
+import {CandidateList} from '../types/candidate-list';
+import {SortOrder} from '../../../app.constants';
 
 export class CoffeeListStoreState {
-    candidates: Candidate[] = [];
+    candidateList: CandidateList = {
+        candidates: [],
+        sort: {
+            field: 'votes',
+            order: SortOrder.Desc,
+        },
+    };
     detailsModal: DetailsModal = {};
     requests: Requests = {
         listCandidates: {},

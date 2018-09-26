@@ -6,7 +6,7 @@ import {
     EventEmitter,
 } from '@angular/core';
 import {Candidate} from '../../types/candidate';
-import {USER_ACTION} from '../../coffee-list.constants';
+import {UserAction} from '../../coffee-list.constants';
 
 @Component({
     selector: 'ce-coffee-candidate',
@@ -18,7 +18,7 @@ export class CoffeeCandidateComponent {
     @Input()
     candidate: Candidate;
     @Output()
-    onUserAction = new EventEmitter<string>();
+    onUserAction = new EventEmitter<UserAction>();
 
-    USER_ACTION = USER_ACTION;
+    UserAction = UserAction;
 }
