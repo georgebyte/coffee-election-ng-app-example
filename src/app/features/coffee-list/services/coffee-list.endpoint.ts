@@ -43,12 +43,12 @@ export class CoffeeListEndpoint extends StoreEndpoint {
     }
 
     addVote(
-        store: CoffeeListStore,
         candidate: Candidate,
         requestStateUpdater: RequestStateUpdater
     ): Observable<null> {
-        const request = COFFEE_LIST_CONFIG.requests.addVote;
-        const url = endpointHelpers.getUrlWithParams(request.url, {id: candidate.id});
+        const url = endpointHelpers.getUrlWithParams(
+            COFFEE_LIST_CONFIG.requests.addVote.url, {id: candidate.id}
+        );
         requestStateUpdater({inProgress: true});
         return this.http.post<ApiResponse<null>>(url, null).pipe(
             map(response => {
@@ -66,12 +66,12 @@ export class CoffeeListEndpoint extends StoreEndpoint {
     }
 
     removeVote(
-        store: CoffeeListStore,
         candidate: Candidate,
         requestStateUpdater: RequestStateUpdater
     ): Observable<null> {
-        const request = COFFEE_LIST_CONFIG.requests.removeVote;
-        const url = endpointHelpers.getUrlWithParams(request.url, {id: candidate.id});
+        const url = endpointHelpers.getUrlWithParams(
+            COFFEE_LIST_CONFIG.requests.removeVote.url, {id: candidate.id}
+        );
         requestStateUpdater({inProgress: true});
         return this.http.delete<ApiResponse<null>>(url).pipe(
             map(response => {

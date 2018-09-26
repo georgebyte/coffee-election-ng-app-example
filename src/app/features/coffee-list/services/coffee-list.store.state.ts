@@ -7,6 +7,5 @@ export class CoffeeListStoreState {
     detailsModal: DetailsModal = {};
     requests: Requests = {
         listCandidates: {},
-        postVote: {},
     };
 }

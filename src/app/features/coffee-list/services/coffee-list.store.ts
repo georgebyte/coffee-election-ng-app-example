@@ -64,13 +64,15 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
 
     submitUserAction(candidate: Candidate, action: string): void {
         let request$: Observable<null>;
-        const requestStateUpdater = this.getCandidateRequestStateUpdater(candidate);
+        const requestStateUpdater = this.getUpdateCandidateRequestStateUpdater(
+            candidate
+        );
 
         if (action === USER_ACTION.addVote) {
-            request$ = this.endpoint.addVote(this, candidate, requestStateUpdater);
+            request$ = this.endpoint.addVote(candidate, requestStateUpdater);
         }
         if (action === USER_ACTION.removeVote) {
-            request$ = this.endpoint.removeVote(this, candidate, requestStateUpdater);
+            request$ = this.endpoint.removeVote(candidate, requestStateUpdater);
         }
         request$
             .pipe(
@@ -113,7 +115,7 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
         });
     }
 
-    private getCandidateRequestStateUpdater(candidate: Candidate): RequestStateUpdater {
+    private getUpdateCandidateRequestStateUpdater(candidate: Candidate): RequestStateUpdater {
         return (requestState) => {
             this.setState({
                 ...this.state,
