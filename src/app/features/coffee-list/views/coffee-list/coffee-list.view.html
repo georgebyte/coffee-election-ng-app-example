@@ -1,20 +1,39 @@
 <ng-container *ngIf="{state$: store.state$ | async} as subs">
-    <div class="ce-panel ce-coffee-list-view__list">
-        <div class="ce-loader ce-loader--takeover" *ngIf="subs.state$.requests.listCandidates.inProgress"></div>
+    <div
+        class="ce-panel ce-coffee-list-view__list-item"
+        *ngIf="subs.state$.requests.listCandidates.inProgress"
+    >
+        <div class="ce-loader ce-loader--takeover"></div>
+    </div>
 
-        <ng-container *ngIf="!subs.state$.requests.listCandidates.inProgress">
+    <ng-container *ngIf="!subs.state$.requests.listCandidates.inProgress">
+        <ce-url-sort-selector
+            class="ce-url-sort-selector ce-coffee-list-view__sort-selector"
+            [sort]="subs.state$.candidateList.sort"
+            [fields]="[{name: 'Votes', field: 'votes'}]"
+        ></ce-url-sort-selector>
+
+        <div
+            class="ce-panel ce-coffee-list-view__list-item"
+            *ngFor="let candidate of subs.state$.candidateList.candidates"
+        >
             <ce-coffee-candidate
                 class="ce-coffee-candidate ce-coffee-list-view__candidate"
-                *ngFor="let candidate of subs.state$.candidateList.candidates"
                 [candidate]="candidate"
                 (onUserAction)="store.submitUserAction(candidate, $event)"
             >
-                <button (click)="store.openDetailsModal(candidate)">Show details</button>
+                <button (click)="store.openDetailsModal(candidate)">
+                    Show details
+                </button>
             </ce-coffee-candidate>
-        </ng-container>
-    </div>
+        </div>
+    </ng-container>
 
-    <ce-modal #detailsModal class="ce-modal" (onClose)="store.setDetailsModalState(null)">
+    <ce-modal
+        #detailsModal
+        class="ce-modal"
+        (onClose)="store.setDetailsModalState(null)"
+    >
         {{subs.state$.detailsModal.candidate | json}}
     </ce-modal>
 </ng-container>

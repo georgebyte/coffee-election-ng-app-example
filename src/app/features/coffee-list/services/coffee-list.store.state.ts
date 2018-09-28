@@ -8,7 +8,7 @@ export class CoffeeListStoreState {
         candidates: [],
         sort: {
             field: 'votes',
-            order: SortOrder.Desc,
+            order: SortOrder.Asc,
         },
     };
     detailsModal: DetailsModal = {};

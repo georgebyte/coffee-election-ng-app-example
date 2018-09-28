@@ -3,7 +3,10 @@
 </div>
 
 <div class="ce-coffee-candidate__action">
-    <button (click)="onUserAction.emit(candidate.userAction)" [ngSwitch]="candidate.userAction">
+    <button
+        (click)="onUserAction.emit(candidate.userAction)"
+        [ngSwitch]="candidate.userAction"
+    >
         <ng-container *ngSwitchCase="UserAction.AddVote">
             Add vote
         </ng-container>

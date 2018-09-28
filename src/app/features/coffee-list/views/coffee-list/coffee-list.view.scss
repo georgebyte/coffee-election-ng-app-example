@@ -1,17 +1,11 @@
 @import '../../../../styles/_variables';
 
-.ce-coffee-list-view__list {
+.ce-coffee-list-view__list-item {
     position: relative;
     min-height: 60px;
     margin-top: $spacing--default;
-    padding: 0;
+    padding: $spacing--default;
 }
 
 .ce-coffee-list-view__candidate {
-    padding: $spacing--default;
-    border-top: 1px solid $border-color--default;
-
-    &:first-of-type {
-        border-top: 0;
-    }
 }
