@@ -12,6 +12,7 @@ import {UserStore} from '../../../core/user/services/user.store';
 import {User} from '../../../core/user/types/user';
 import {UserAction} from '../coffee-list.constants';
 import {RequestStateUpdater} from '../../../shared/types/request-state-updater';
+import {Sort} from '../../../shared/types/sort';
 
 @Injectable()
 export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDestroy {
@@ -26,12 +27,6 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
     init(): void {
         this.initReloadCandidates$();
         this.subscribeToUserUpdates();
-
-        this.reloadCandidates();
-    }
-
-    setDetailsModal(detailsModal: ModalComponent): void {
-        this.detailsModal = detailsModal;
     }
 
     ngOnDestroy(): void {
@@ -41,6 +36,10 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
 
     reloadCandidates(): void {
         this.reloadCandidates$.next();
+    }
+
+    setDetailsModal(detailsModal: ModalComponent): void {
+        this.detailsModal = detailsModal;
     }
 
     openDetailsModal(candidate: Candidate): void {
@@ -81,6 +80,17 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
                 })
             )
             .subscribe();
+    }
+
+    sortCandidates(sort: Sort): void {
+        this.setState({
+            ...this.state,
+            candidateList: {
+                ...this.state.candidateList,
+                sort: sort,
+            },
+        });
+        this.reloadCandidates();
     }
 
     private initReloadCandidates$(): void {

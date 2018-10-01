@@ -1,4 +1,10 @@
 <ng-container *ngIf="{state$: store.state$ | async} as subs">
+    <ce-url-sort-selector
+        class="ce-url-sort-selector ce-coffee-list-view__sort-selector"
+        [sort]="subs.state$.candidateList.sort"
+        [fields]="[{name: 'Votes', field: 'votes'}, {name: 'Name', field: 'name'}]"
+    ></ce-url-sort-selector>
+
     <div
         class="ce-panel ce-coffee-list-view__list-item"
         *ngIf="subs.state$.requests.listCandidates.inProgress"
@@ -7,12 +13,6 @@
     </div>
 
     <ng-container *ngIf="!subs.state$.requests.listCandidates.inProgress">
-        <ce-url-sort-selector
-            class="ce-url-sort-selector ce-coffee-list-view__sort-selector"
-            [sort]="subs.state$.candidateList.sort"
-            [fields]="[{name: 'Votes', field: 'votes'}]"
-        ></ce-url-sort-selector>
-
         <div
             class="ce-panel ce-coffee-list-view__list-item"
             *ngFor="let candidate of subs.state$.candidateList.candidates"

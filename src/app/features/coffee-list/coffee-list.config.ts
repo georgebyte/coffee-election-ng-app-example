@@ -1,4 +1,5 @@
 import {APP_CONFIG} from '../../app.config';
+import {SortOrder} from '../../app.constants';
 
 export const COFFEE_LIST_CONFIG = {
     requests: {
@@ -15,4 +16,6 @@ export const COFFEE_LIST_CONFIG = {
             url: `${APP_CONFIG.apiBaseUrl}/candidates/:id/vote`,
         },
     },
+    defaultSortField: 'votes',
+    defaultSortOrder: SortOrder.Asc,
 };
