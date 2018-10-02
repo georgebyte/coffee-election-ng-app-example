@@ -7,4 +7,6 @@
     title="Sort by {{field.name | lowercase}}"
 >
     {{field.name}}
+    <ng-container *ngIf="field.order === SortOrder.Asc">▲</ng-container>
+    <ng-container *ngIf="field.order === SortOrder.Desc">▼</ng-container>
 </a>

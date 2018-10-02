@@ -98,7 +98,7 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
             .pipe(
                 switchMap(() => {
                     return this.endpoint.listCandidates(
-                        this,
+                        this, this.state.candidateList.sort
                     );
                 }),
                 tap(candidates => {

@@ -1,7 +1,10 @@
 import {Params} from '@angular/router';
 
+import {SortOrder} from '../../../app.constants';
+
 export interface SortField {
     name: string;
     field: string;
-    queryParams?: Params,
+    order?: SortOrder;
+    queryParams?: Params;
 }

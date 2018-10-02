@@ -13,8 +13,8 @@ import {ActivatedRoute} from '@angular/router';
 import {CoffeeListStore} from '../../services/coffee-list.store';
 import {CoffeeListEndpoint} from '../../services/coffee-list.endpoint';
 import {ModalComponent} from '../../../../shared/components/modal/modal.component';
-import {SortOrder} from '../../../../app.constants';
 import {COFFEE_LIST_CONFIG} from '../../coffee-list.config';
+import * as sortHelpers from '../../../../shared/helpers/sort.helpers';
 
 @Component({
     templateUrl: './coffee-list.view.html',
@@ -50,17 +50,12 @@ export class CoffeeListView implements OnInit, AfterViewInit, OnDestroy {
         this.route.queryParams
             .pipe(takeUntil(this.ngUnsubscribe$))
             .subscribe(params => {
-                // TODO (jurebajt): Extract into sortHelpers
-                let field = params.sort || COFFEE_LIST_CONFIG.defaultSortField;
-                let order = SortOrder.Asc;
-                if (field.startsWith('-')) {
-                    order = SortOrder.Desc;
-                    field = field.substr(1);
-                }
-                this.store.sortCandidates({
-                    field: field,
-                    order: order,
-                });
+                this.store.sortCandidates(
+                    sortHelpers.convertQueryParamsToSort(
+                        params,
+                        COFFEE_LIST_CONFIG.defaultSortField
+                    )
+                );
             });
     }
 }
