@@ -1,0 +1,48 @@
+@import './_variables';
+
+.ce-button {
+    padding: ($spacing--small - $ce-button__border-width--default)
+        ($spacing--default - $ce-button__border-width--default);
+    color: $ce-button__color--default;
+    background-color: $ce-button__background-color--default;
+    border: $ce-button__border-width--default solid
+        $ce-button__background-color--default;
+    border-radius: $border-radius--default;
+    font-size: $font-size--default;
+    cursor: pointer;
+
+    &[disabled] {
+        cursor: initial;
+        opacity: 0.7;
+    }
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+        outline: 0;
+        border-color: $ce-button__border-color--default;
+        color: $color--neutral;
+    }
+}
+
+.ce-button--primary {
+    background-color: $color--primary;
+    border-color: $color--primary;
+    color: $ce-button__color--primary;
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+        background-color: $color--primary-dark;
+        border-color: $color--primary-dark;
+        color: $ce-button__color--primary;
+    }
+}
+
+.ce-button--outline {
+    background-color: transparent;
+    border-color: $ce-button__border-color--default;
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+        border-color: $color--neutral;
+    }
+}

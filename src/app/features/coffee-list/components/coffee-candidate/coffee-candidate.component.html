@@ -1,9 +1,16 @@
 <div class="ce-coffee-candidate__name">
-    {{candidate.name}} {{candidate.votes.length}}
+    <div class="ce-coffee-candidate__label">Name</div>
+    <div class="ce-coffee-candidate__value">{{candidate.name}}</div>
+</div>
+
+<div class="ce-coffee-candidate__votes">
+    <div class="ce-coffee-candidate__label">Votes</div>
+    <div class="ce-coffee-candidate__value">{{candidate.votes.length}}</div>
 </div>
 
 <div class="ce-coffee-candidate__action">
     <button
+        class="ce-button ce-button--primary ce-coffee-candidate__action-button"
         (click)="onUserAction.emit(candidate.userAction)"
         [ngSwitch]="candidate.userAction"
     >

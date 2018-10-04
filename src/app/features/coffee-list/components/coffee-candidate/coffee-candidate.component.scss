@@ -1,4 +1,35 @@
 
+@import '../../../../styles/_variables';
+
 :host {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -$spacing--small;
+    margin-left: -$spacing--small;
+}
+
+.ce-coffee-candidate__name,
+.ce-coffee-candidate__votes,
+.ce-coffee-candidate__action,
+.ce-coffee-candidate__additional-actions {
+    padding-top: $spacing--small;
+    padding-left: $spacing--small;
+}
+
+.ce-coffee-candidate__name {
+    flex: 1 0 300px;
+}
+
+.ce-coffee-candidate__votes {
+    flex: 0 0 50px;
+}
+
+.ce-coffee-candidate__action,
+.ce-coffee-candidate__additional-actions {
+    flex: 0 0 150px;
+}
+
+.ce-coffee-candidate__action-button,
+.ce-coffee-candidate__additional-actions ::ng-deep .ce-button {
+    width: 100%;
 }

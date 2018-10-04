@@ -49,3 +49,9 @@ $z-index--modal: 10000;
 $font-family--default: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 
 $body__background-color: #cec3bb;
+
+$ce-button__background-color--default: $color--neutral-light;
+$ce-button__color--default: $color--neutral;
+$ce-button__color--primary: $color--primary-inverted;
+$ce-button__border-width--default: 1px;
+$ce-button__border-color--default: $color--neutral-light;
