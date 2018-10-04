@@ -22,7 +22,10 @@
                 [candidate]="candidate"
                 (onUserAction)="store.submitUserAction(candidate, $event)"
             >
-                <button (click)="store.openDetailsModal(candidate)">
+                <button
+                    class="ce-button"
+                    (click)="store.openDetailsModal(candidate)"
+                >
                     Show details
                 </button>
             </ce-coffee-candidate>
@@ -34,6 +37,18 @@
         class="ce-modal"
         (onClose)="store.setDetailsModalState(null)"
     >
-        {{subs.state$.detailsModal.candidate | json}}
+        <ce-candidate-details
+            class="ce-coffee-list-view__candidate-details"
+            *ngIf="subs.state$.detailsModal.candidate"
+            [candidate]="subs.state$.detailsModal.candidate"
+        ></ce-candidate-details>
+        <div class="ce-modal__actions">
+            <button
+                class="ce-button ce-button--outline"
+                (click)="store.closeDetailsModal()"
+            >
+                Close
+            </button>
+        </div>
     </ce-modal>
 </ng-container>

@@ -1,0 +1,15 @@
+<div class="ce-candidate-details__basic-info">
+    <div class="ce-candidate-details__name">
+        {{candidate.name}}
+    </div>
+    <div class="ce-candidate-details__votes-count">
+        Votes:
+        {{candidate.votes.length}}
+    </div>
+</div>
+
+<div class="ce-candidate-details__votes">
+    <div class="ce-candidate-details__vote" *ngFor="let vote of candidate.votes">
+        {{vote.date}}: {{vote.user}}
+    </div>
+</div>
