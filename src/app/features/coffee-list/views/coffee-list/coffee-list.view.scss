@@ -10,3 +10,38 @@
 .ce-coffee-list-view__candidate-details {
     padding: $spacing--default;
 }
+
+@media only screen and (min-width: 500px) {
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__action,
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__additional-actions {
+        flex-basis: 50%;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__name {
+        flex-basis: 80%;
+    }
+
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__votes {
+        flex-basis: 20%;
+    }
+
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__action {
+        flex-basis: 150px;
+    }
+
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__additional-actions {
+        flex-basis: 100px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__name {
+        flex-basis: 500px;
+    }
+
+    .ce-coffee-list-view__candidate ::ng-deep .ce-coffee-candidate__votes {
+        flex-basis: auto;
+    }
+}

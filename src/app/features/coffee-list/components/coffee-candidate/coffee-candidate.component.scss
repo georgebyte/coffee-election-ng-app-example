@@ -16,6 +16,12 @@
     padding-left: $spacing--small;
 }
 
+.ce-coffee-candidate__label {
+    font-size: $font-size--smaller;
+    color: $color--neutral-light;
+    text-transform: uppercase;
+}
+
 .ce-coffee-candidate__name {
     flex: 1 0 300px;
 }
@@ -26,7 +32,7 @@
 
 .ce-coffee-candidate__action,
 .ce-coffee-candidate__additional-actions {
-    flex: 0 0 150px;
+    flex: 0 0 100%;
 }
 
 .ce-coffee-candidate__action-button,

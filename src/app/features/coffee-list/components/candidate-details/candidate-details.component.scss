@@ -1,3 +1,9 @@
+@import '../../../../styles/_variables';
+
 :host {
     display: block;
+}
+
+.ce-candidate-details__name {
+    margin: 0 0 $spacing--small;
 }
