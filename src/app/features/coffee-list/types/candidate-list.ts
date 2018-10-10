@@ -1,4 +1,3 @@
-
 import {Candidate} from './candidate';
 import {Sort} from '../../../shared/types/sort';
 

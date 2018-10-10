@@ -29,7 +29,10 @@ export class UrlSortSelectorComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         this.fields = this.originalFields.map(field => {
             let order = '';
-            if (this.sort.field === field.field && this.sort.order === SortOrder.Asc) {
+            if (
+                this.sort.field === field.field &&
+                this.sort.order === SortOrder.Asc
+            ) {
                 order = '-';
             }
             return {
@@ -37,8 +40,8 @@ export class UrlSortSelectorComponent implements OnChanges {
                 order: order === '-' ? SortOrder.Asc : SortOrder.Desc,
                 queryParams: {
                     [APP_CONFIG.sortQueryParam]: `${order}${field.field}`,
-                }
-            }
+                },
+            };
         });
     }
 }

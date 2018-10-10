@@ -4,10 +4,7 @@ import {RouterModule} from '@angular/router';
 import {ModalComponent} from './components/modal/modal.component';
 import {UrlSortSelectorComponent} from './components/url-sort-selector/url-sort-selector.component';
 
-const EXPORTED_DECLARATIONS = [
-    ModalComponent,
-    UrlSortSelectorComponent,
-];
+const EXPORTED_DECLARATIONS = [ModalComponent, UrlSortSelectorComponent];
 
 @NgModule({
     declarations: [...EXPORTED_DECLARATIONS],

@@ -15,12 +15,16 @@ import {RequestStateUpdater} from '../../../shared/types/request-state-updater';
 import {Sort} from '../../../shared/types/sort';
 
 @Injectable()
-export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDestroy {
+export class CoffeeListStore extends Store<CoffeeListStoreState>
+    implements OnDestroy {
     private ngUnsubscribe$: Subject<undefined> = new Subject();
     private reloadCandidates$: Subject<undefined> = new Subject();
     private detailsModal: ModalComponent;
 
-    constructor(private endpoint: CoffeeListEndpoint, private userStore: UserStore) {
+    constructor(
+        private endpoint: CoffeeListEndpoint,
+        private userStore: UserStore
+    ) {
         super(new CoffeeListStoreState());
     }
 
@@ -98,7 +102,8 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
             .pipe(
                 switchMap(() => {
                     return this.endpoint.listCandidates(
-                        this, this.state.candidateList.sort
+                        this,
+                        this.state.candidateList.sort
                     );
                 }),
                 tap(candidates => {
@@ -114,7 +119,10 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
         this.userStore.user$
             .pipe(takeUntil(this.ngUnsubscribe$))
             .subscribe(user => {
-                this.updateCandidatesState(this.state.candidateList.candidates, user);
+                this.updateCandidatesState(
+                    this.state.candidateList.candidates,
+                    user
+                );
             });
     }
 
@@ -123,25 +131,30 @@ export class CoffeeListStore extends Store<CoffeeListStoreState> implements OnDe
             ...this.state,
             candidateList: {
                 ...this.state.candidateList,
-                candidates: candidateHelpers.getCandidatesInStoreFormat(candidates, user),
-            }
+                candidates: candidateHelpers.getCandidatesInStoreFormat(
+                    candidates,
+                    user
+                ),
+            },
         });
     }
 
-    private getUpdateCandidateRequestStateUpdater(candidate: Candidate): RequestStateUpdater {
-        return (requestState) => {
+    private getUpdateCandidateRequestStateUpdater(
+        candidate: Candidate
+    ): RequestStateUpdater {
+        return requestState => {
             this.setState({
                 ...this.state,
                 candidateList: {
                     ...this.state.candidateList,
                     candidates: this.state.candidateList.candidates.map(c => {
                         if (c.id === candidate.id) {
-                            return {...c, updateRequest: requestState}
+                            return {...c, updateRequest: requestState};
                         }
                         return c;
                     }),
-                }
+                },
             });
-        }
+        };
     }
 }

@@ -5,10 +5,7 @@ import {UserEndpoint} from './user/services/user.endpoint';
 @NgModule({
     declarations: [],
     imports: [],
-    providers: [
-        UserStore,
-        UserEndpoint,
-    ],
+    providers: [UserStore, UserEndpoint],
 })
 export class CoreModule {
     constructor(
