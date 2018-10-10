@@ -1,5 +1,9 @@
 @import '../../../../styles/_variables';
 
+.ce-coffee-list-view__sort-selector {
+    text-align: right;
+}
+
 .ce-coffee-list-view__list-item {
     position: relative;
     min-height: 60px;
