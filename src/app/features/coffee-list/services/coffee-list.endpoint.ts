@@ -3,26 +3,23 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {map, catchError, delay} from 'rxjs/operators';
 
-import {StoreEndpoint} from '../../../shared/types/store-endpoint';
 import {ApiResponse} from '../../../shared/types/api-response';
-import {CoffeeListStore} from './coffee-list.store';
 import {COFFEE_LIST_CONFIG} from '../coffee-list.config';
 import {Candidate} from '../types/candidate';
 import * as endpointHelpers from '../../../shared/helpers/endpoint.helpers';
 import * as sortHelpers from '../../../shared/helpers/sort.helpers';
-import {RequestStateUpdater} from '../../../shared/types/request-state-updater';
+import {StoreRequestStateUpdater} from '../../../shared/types/store-request-state-updater';
+import {CustomRequestStateUpdater} from '../../../shared/types/custom-request-state-updater';
 import {Sort} from '../../../shared/types/sort';
 import {SortOrder} from '../../../app.constants';
 
 @Injectable()
-export class CoffeeListEndpoint extends StoreEndpoint {
-    constructor(private http: HttpClient) {
-        super();
-    }
+export class CoffeeListEndpoint {
+    constructor(private http: HttpClient) {}
 
     listCandidates(
-        store: CoffeeListStore,
-        sort: Sort
+        sort: Sort,
+        requestStateUpdater: StoreRequestStateUpdater
     ): Observable<Candidate[]> {
         const request = COFFEE_LIST_CONFIG.requests.listCandidates;
         const options = {
@@ -30,17 +27,13 @@ export class CoffeeListEndpoint extends StoreEndpoint {
                 ...sortHelpers.convertSortToRequestParams(sort),
             },
         };
-        this.setRequestState(store, request, {
-            inProgress: true,
-        });
+        requestStateUpdater(request.name, {inProgress: true});
         return this.http
             .get<ApiResponse<Candidate[]>>(request.url, options)
             .pipe(
                 delay(2000), // Simulate request delay
                 map(response => {
-                    this.setRequestState(store, request, {
-                        inProgress: false,
-                    });
+                    requestStateUpdater(request.name, {inProgress: false});
                     // Simulate sorting on server
                     const candidates = response.data.sort(
                         (c1: Candidate, c2: Candidate): number => {
@@ -63,7 +56,7 @@ export class CoffeeListEndpoint extends StoreEndpoint {
                     return candidates;
                 }),
                 catchError((error: HttpErrorResponse) => {
-                    this.setRequestState(store, request, {
+                    requestStateUpdater(request.name, {
                         inProgress: false,
                         error: true,
                     });
@@ -74,7 +67,7 @@ export class CoffeeListEndpoint extends StoreEndpoint {
 
     addVote(
         candidate: Candidate,
-        requestStateUpdater: RequestStateUpdater
+        requestStateUpdater: CustomRequestStateUpdater
     ): Observable<null> {
         const url = endpointHelpers.getUrlWithParams(
             COFFEE_LIST_CONFIG.requests.addVote.url,
@@ -98,7 +91,7 @@ export class CoffeeListEndpoint extends StoreEndpoint {
 
     removeVote(
         candidate: Candidate,
-        requestStateUpdater: RequestStateUpdater
+        requestStateUpdater: CustomRequestStateUpdater
     ): Observable<null> {
         const url = endpointHelpers.getUrlWithParams(
             COFFEE_LIST_CONFIG.requests.removeVote.url,

@@ -11,7 +11,9 @@ import * as candidateHelpers from '../helpers/candidate.helpers';
 import {UserStore} from '../../../core/user/services/user.store';
 import {User} from '../../../core/user/types/user';
 import {UserAction} from '../coffee-list.constants';
-import {RequestStateUpdater} from '../../../shared/types/request-state-updater';
+import * as endpointHelpers from '../../../shared/helpers/endpoint.helpers';
+import {StoreRequestStateUpdater} from '../../../shared/types/store-request-state-updater';
+import {CustomRequestStateUpdater} from '../../../shared/types/custom-request-state-updater';
 import {Sort} from '../../../shared/types/sort';
 
 @Injectable()
@@ -20,6 +22,7 @@ export class CoffeeListStore extends Store<CoffeeListStoreState>
     private ngUnsubscribe$: Subject<undefined> = new Subject();
     private reloadCandidates$: Subject<undefined> = new Subject();
     private detailsModal: ModalComponent;
+    private storeRequestStateUpdater: StoreRequestStateUpdater;
 
     constructor(
         private endpoint: CoffeeListEndpoint,
@@ -31,6 +34,10 @@ export class CoffeeListStore extends Store<CoffeeListStoreState>
     init(): void {
         this.initReloadCandidates$();
         this.subscribeToUserUpdates();
+
+        this.storeRequestStateUpdater = endpointHelpers.getStoreRequestStateUpdater(
+            this
+        );
     }
 
     ngOnDestroy(): void {
@@ -102,8 +109,8 @@ export class CoffeeListStore extends Store<CoffeeListStoreState>
             .pipe(
                 switchMap(() => {
                     return this.endpoint.listCandidates(
-                        this,
-                        this.state.candidateList.sort
+                        this.state.candidateList.sort,
+                        this.storeRequestStateUpdater
                     );
                 }),
                 tap(candidates => {
@@ -141,7 +148,7 @@ export class CoffeeListStore extends Store<CoffeeListStoreState>
 
     private getUpdateCandidateRequestStateUpdater(
         candidate: Candidate
-    ): RequestStateUpdater {
+    ): CustomRequestStateUpdater {
         return requestState => {
             this.setState({
                 ...this.state,
